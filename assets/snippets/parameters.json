@@ -34,57 +34,50 @@
     },
     {
         "Line": "   # Images\n"
-    },    
+    },
     {
         "Line": "   [string]$RelativeImage = \"../images/xxx.png\",                               # Relative Path Webpage Reports\n"
-    },    
+    },
     {
-        "Line": "   [string]$DistinguishedImagePath = \"C:\/Scripts\/xx-xx\/Images\/\",           # Distinguished Email Attachment\n"
-    },    
+        "Line": "   [string]$DistinguishedImagePath = \"C:/Scripts/xx-xx/Images/\",           # Distinguished Email Attachment\n"
+    },
     {
         "Line": "   [string]$TheImageFileName = \"xxx.png\",                                      # Image File Name Email\n"
-    },       
+    },
     {
-        "Line": "   [string]$emojiPlug = '<span>&#128268;</span>',                                # Emoji 🔌 style=font-size:20px \n"
-    }, 
-    {
-        "Line": "   [string]$emojiComputer = '<span>&#128187;</span>',                            # Emoji 🖥️ style=font-size:20px \n"
-    }, 
-    {
-        "Line": "   [string]$emojiUpward = '<span>&#128200;</span>',                              # Emoji 📈 style=font-size:20px \n"
-    }, 
-    {
-        "Line": "   [string]$emoji = '<span>&#128202;</span>',                                    # Emoji 📊 style=font-size:20px \n"
-    }, 
+        "Line": "   [string]$emoji = '<span>%Emoji_HTML%</span>',\n"
+    },
     {
         "Line": "   # Email\n"
-    },    
+    },
     {
         "Line": "   [switch]$email,\n"
-    },    
+    },
     {
         "Line": "   [string]$To = \"Peter.pfau@va.gov\",\n"
-    },    
+    },
     {
         "Line": "   [string]$From = \"Monitor@va.gov\",\n"
-    },    
+    },
     {
         "Line": "   [string]$Subject = \"thesubject?\",\n"
-    },    
+    },
     {
         "Line": "   # Colors\n"
-    },    
+    },
     {
         "Line": "   [switch]$TableWrap,\n"
-    },    
+    },
     {
         "Line": "   [string]$THColor = \"lightgrey\",\n"
-    },    {
+    },
+    {
         "Line": "   [string]$TableColor = \"#46A6FA\",\n"
-    },    {
+    },
+    {
         "Line": "   [string]$NotesColor = \"#46A6FA\"\n"
-    },   
+    },
     {
         "Line": ")\n"
     }
-    ]
+]

@@ -6,14 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/modal.css">
-    <!-- highlight.js Syntax Highlight -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark-reasonable.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/qtcreator-dark.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/docco.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/devibeans.css"> -->
 
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>Script Fast</title>
@@ -50,9 +43,27 @@
                     <label for="script-content">Script Content:</label>
                     <textarea name="script-content" id="script-content" cols="70" rows="7" placeholder="Enter script content"></textarea>     
                 </div>
+      
                 <div class="input-area">
                     <label for="script-collection">Script Collection:</label>
-                    <textarea name="script-collection" id="script-collection" cols="70" rows="6" placeholder="Enter script collection"></textarea>     
+                    <textarea name="script-collection" id="script-collection" cols="70" rows="10" placeholder="Enter script collection"></textarea>     
+                </div>
+
+                <div class="input-box" style="display: flex; align-items: center; gap: 10px;">
+                    <label for="emoji-selector" style="margin: 0;">Select Emoji:</label>
+                    <select id="emoji-selector" style="flex: 1;">
+                        <option value="💻">💻 Laptop</option>
+                        <option value="🖥️">🖥️ Desktop Computer</option>
+                        <option value="⌨️">⌨️ Keyboard</option>
+                        <option value="🖱️">🖱️ Mouse</option>
+                        <option value="🖨️">🖨️ Printer</option>
+                        <option value="📱">📱 Mobile Phone</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label>Emoji HTML Code:</label>
+                    <pre><code id="emoji-html-display" style="display: block; padding: 8px; background: #f5f5f5; border-radius: 4px;"></code></pre>
+                <button onclick="getEmojiHTML()">Get Emoji HTML</button>
                 </div>
                 <span class="Complexity-title">Complexity</span>
                 <span class="Complexity-category">
@@ -104,8 +115,9 @@
             </div>
 
     </div>
-    <script src="Assets/script/Complexity.js"> </script>
-    <script src="Assets/script/script.js">    </script>
+    <script src="assets/script/Complexity.js"> </script>
+    <script src="assets/script/script.js">    </script>
+    </script>
     <script>
         // Define an array of options for the select dropdown
         var optionsComputer = [
@@ -147,6 +159,17 @@
             }
         }
 
+    </script>
+    <script>
+        function getEmojiHTML() {
+    const emojiSelector = document.getElementById('emoji-selector');
+    const emojiHTMLDisplay = document.getElementById('emoji-html-display');
+    const selectedEmoji = emojiSelector.value;
+    const emojiHTML = `&#${selectedEmoji.codePointAt(0)};`;
+    alert(emojiHTML);
+    // emojiHTMLDisplay.textContent = emojiHTML;
+}
+       
     </script>
     <script>
         ////////////////////////////////////
@@ -573,7 +596,15 @@
 
 
    </script>
-    
+
+
+    <script>
+        document.getElementById('emoji-selector').addEventListener('change', function() {
+            const selectedEmoji = this.value;
+            const emojiHTML = `&#${selectedEmoji.codePointAt(0)};`;
+            document.getElementById('emoji-html-display').textContent = emojiHTML;
+        });
+    </script>
 <script>
     function copyText() {
 
@@ -761,9 +792,11 @@
     }
 
 </script>
+
+
    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
-         hljs.initHighlightingOnLoad();     
+         hljs.highlightAll();
     </script>
 </body>
 
