@@ -54,10 +54,11 @@
                     <select id="emoji-selector" style="flex: 1;">
                         <option value="💻">💻 Laptop</option>
                         <option value="🖥️">🖥️ Desktop Computer</option>
-                        <option value="⌨️">⌨️ Keyboard</option>
-                        <option value="🖱️">🖱️ Mouse</option>
-                        <option value="🖨️">🖨️ Printer</option>
-                        <option value="📱">📱 Mobile Phone</option>
+                        <option value="📈">📈 Chart Increasing</option>
+                        <option value="📊">📊 Bar Chart</option>
+                        <option value="📉">📉 Chart Decreasing</option>
+                        <option value="👨🏽‍💻">👨🏽‍💻 Man Technologist</option>
+                        <option value="🛜">🛜 Wireless</option>
                     </select>
                 </div>
                 <div class="input-box">
@@ -78,12 +79,17 @@
                     
                 </span>
             </div>
-            <div class="example" >
-                <p id="example1"></p>
+            <div class="example" style="display: none;">
+                <p id="example1" ></p>
                 <p id="example2"></p>
                 <p id="example3"></p>
                 <p id="attribute1"></p>
             </div>
+            <!-- <div class="input-box" style="display: flex; align-items: center; gap: 10px;"> -->
+                <a id="github-link" href="https://peter-pfau.github.io/YouCan-Code/" target="_blank" style="text-decoration: none; color: #000; font-size: 1.5em;">
+                    <span>🐙</span> <!-- GitHub emoji -->
+                </a>
+            <!-- </div> -->
 <div>
     <textarea name="script-content-commentBasedHelp" id="script-content-commentBasedHelp" cols="70" rows="5" style="display: none"></textarea> 
     <textarea name="script-content-parameters" id="script-content-parameters" cols="70" rows="5" style="display: none"></textarea> 
@@ -167,6 +173,28 @@
     const selectedEmoji = emojiSelector.value;
     const emojiHTML = `&#${selectedEmoji.codePointAt(0)};`;
     alert(emojiHTML);
+    async function callParametersRoute() {
+        try {
+            const response = await fetch('/parameters', {
+                method: 'GET', // or 'POST', depending on your API
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Response from /test:', data);
+            alert('Response received: ' + JSON.stringify(data));
+        } catch (error) {
+            console.error('Error calling /test route:', error);
+            alert('Error: ' + error.message);
+        }
+    }
+    callParametersRoute()
     // emojiHTMLDisplay.textContent = emojiHTML;
 }
        

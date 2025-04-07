@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 
 // Middleware to parse JSON bodies and handle CORS
 app.use(express.json());
@@ -37,7 +37,11 @@ app.get('/', (req, res) => {
 });
 
 
-
+// Test endpoint to verify server is working
+app.get('/parameters', (req, res) => {
+  console.log('Test endpoint called');
+  res.json('Server is working!');
+});
 
 
 // Test endpoint to verify server is working
