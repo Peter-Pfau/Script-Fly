@@ -1,0 +1,122 @@
+[
+    {
+        "Line": "End {\n"
+    },
+    {
+        "Line": "$DNShostname = [System.Net.Dns]::GetHostByName(($env:computerName))\n$hostname = $DNShostname.Hostname\n"
+    },
+    {   "Line": "if ($TableWrap){\n     $a =      '<style>' \n     $a = $a + ' BODY{background-color:White;}'\n     $a = $a + ' table {border-collapse:collapse; table-layout:auto; width:100%;border-color: White;}'\n     $a = $a + ' th{background-color: lightgrey;}'\n     $a = $a + ' table td {border:solid 1px white; width:100px; word-wrap:break-word;}'\n     $a = $a + ' </style> ' \n }\n"
+    },
+    {   "Line":"else{\n"
+    },
+    {   "Line":"    $a =  '<style>'\n"
+    },
+    {   "Line":"    $a = $a + ' BODY{background-color:White;}'\n"
+    },
+    {   "Line":"    $a = $a + ' TABLE{width: 96%;border-width: 1px;border-style: solid;border-color: White;border-collapse: collapse;white-space:nowrap;}'\n"
+    },
+    {   "Line":"    $a = $a + ' TH{border-width: 1px;padding: 0px;border-style: solid;border-color: White;background-color:LightGrey;white-space:nowrap}'\n"
+    },
+    {   "Line":"    $a = $a + ' TD{border-width: 0px;padding: 0px;border-style: solid;border-color: White;text-indent: 5px;background-color:White;white-space:nowrap}'\n"
+    },
+    {   "Line":"    $a = $a + '</style>'\n"
+    },
+    {   "Line":"}\n"
+    },
+    {   "Line":"    $a = $a + '<table style=width: 100%>'\n"
+    },
+    {   "Line":"    # The style must be in quotes How do I add double quotes to JSON file?'\n"
+    },
+    {   "Line":"    $a = $a + \" <th style='border=2 ;border-top-color: lightgrey;text-align:left;background-color:$tableColor;font-size:small;color:White;margin-left:10px'>\"+$org+'</th>'\n"
+    },
+    {   "Line":"    $a = $a + '</table>'\n"
+    },
+    {   "Line":"    $a = $a + '<table><td style=text-align:middle;font-size:small> <h3>' +$emoji+ $theHeader + '</h3></td><td style=text-align:right>' + $service + '</td></tr>'\n"
+    },
+    {   "Line":"    $a = $a + '</table>'\n\n"
+    },
+
+    {
+        "Line": "   $end = Get-Date\n"
+    },
+
+    {
+        "Line": "   $elapsedTime = $end - $start\n"
+    },
+    {
+        "Line": "   Write-Host 'Total Count: ' $totalCount\n"
+    },
+    {
+        "Line": "   Write-Host 'Elapsed Time: ' $elapsedTime\n"
+    },
+    {
+        "Line": "   $collectionTable\n"
+    },
+    {
+        "Line": "   #$collectionTable | select-object Name, Object, Container, WhenChanged | sort-object WhenChanged \n"
+    },
+    {
+        "Line": "   #$thebody = $collectionTable | select-object Name, Object, Container, WhenChanged | sort-object WhenChanged | ConvertTo-HTML -head $a | Out-String\n"
+    },
+    
+    { 
+        "Line": "   $thebody = $collectionTable | ConvertTo-HTML -head $a| Out-String\n\n"
+    },
+    {
+        "Line": "   ########\n"
+    },
+    {
+        "Line": "   # Footer\n"
+    },
+    {
+        "Line": "   ########\n"
+    },
+    {
+        "Line": "   $end = Get-Date;$ts = New-TimeSpan $start $end\n"
+    },
+    {
+        "Line": "   $thebody = $thebody + '<font size=2 color=lightgrey><br>'\n"
+    },
+    {
+        "Line": "   $thebody = $thebody + 'Node: ' + $hostname\n"
+    },
+    {
+        "Line": "   $thebody = $thebody + '| User: ' + $env:Username\n"
+    },
+    {
+        "Line": "   $thebody = $thebody + '| RunTime:  '+ (get-date).ToString()\n"
+    },
+    {
+        "Line": "   $thebody = $thebody + '| Duration: '+$ts.hours+':'+ $ts.Minutes+':'+$ts.Seconds \n"
+    },
+    {
+        "Line": "   $thebody = $thebody + '| <a href=//'+$hostname + $WebScript.Split(':')[0] +'>' + $WebScript.Split(':')[1]  +'</a>'\n"
+    },
+    {
+        "Line": "   $thebody = $thebody + '</font><br><br>'\n\n"
+    },
+    {
+        "Line": "   #######################\n"
+    },
+    {
+        "Line": "   # // Send Email as HTML\n"
+    },
+    {
+        "Line": "   #######################\n"
+    },
+    {
+        "Line": "   If($email.Ispresent){\n"
+    },
+    {
+        "Line": "       send-mailmessage -to $To -from $From -subject $Subject -body $thebody -smtpServer smtp.va.gov -bodyAshtml\n"
+    },
+    {
+        "Line": "       write-host Email sent to $To\n"
+    },
+    {
+        "Line": "   }\n"
+    },
+    {
+        "Line": "}\n"
+    }
+]

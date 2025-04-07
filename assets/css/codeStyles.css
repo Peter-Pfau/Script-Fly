@@ -1,0 +1,62 @@
+ 
+  pre {
+    position: relative;
+    background: #3e6fbf;
+    padding: 10px;
+    font-size: 15px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    border: 1px solid #e6e7e9;
+    width: 90%;
+    border-radius: 0.5em;
+    margin-left: 20px;
+    
+  }
+  
+  .copy-button {
+    position: absolute;
+    top: 200px;
+    right: 15px;
+    cursor: pointer;
+    color: #fff;
+    background: rgb(225, 34, 34);
+    border-radius: 0.5em;
+    padding: 2px 7px;
+  }
+  
+  .copy-button:hover {
+    color: #000;
+  }
+  .token.property,.token.class-name,.token.constant,.token.symbol {
+    color: #f8c555
+}
+
+.token.comment,.token.block-comment,.token.prolog,.token.doctype,.token.cdata {
+    color: #999
+}
+
+.token.punctuation {
+    color: #ccc
+}
+
+.token.tag,.token.attr-name,.token.namespace,.token.deleted {
+    color: #e2777a
+}
+
+.token.function-name {
+    color: #6196cc
+}
+
+.token.boolean,.token.number,.token.function {
+    color: #f08d49
+}
+.psVariable {
+    color: green
+}
+.psCmd {
+    color: #b37d08;
+    font-size: 15px;
+}
+.psAttribute {
+    color: gray
+}

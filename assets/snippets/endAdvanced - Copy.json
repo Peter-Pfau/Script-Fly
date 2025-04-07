@@ -1,0 +1,76 @@
+[
+    {
+        "Line": "End {\n"
+    },
+    {
+        "Line": ["$DNShostname = [System.Net.Dns]::GetHostByName(($env:computerName))\n",
+        "$hostname = $DNShostname.Hostname\n",
+         " if ($TableWrap){",
+         "     $a =      '<style>'\n",
+         "     $a = $a + ' BODY{background-color:White;}'\n",
+         "     $a = $a + ' table {border-collapse:collapse; table-layout:auto; width:100%;border-color: White;}'\n",
+         "     $a = $a + ' th{background-color: lightgrey;}'\n",
+         "     $a = $a + ' table td {border:solid 1px white; width:100px; word-wrap:break-word;}'\n",
+         "     $a = $a + '</style>'\n",
+         " }\n",
+         " else{\n",
+         "     $a =  '<style>'\n",
+         "     $a = $a + ' BODY{background-color:White;}'\n", 
+         "     $a = $a + ' TABLE{width: 96%;border-width: 1px;border-style: solid;border-color: White;border-collapse: collapse;white-space:nowrap;}'\n",
+         "     $a = $a + ' TH{border-width: 1px;padding: 0px;border-style: solid;border-color: White;background-color:LightGrey;white-space:nowrap}'\n",
+         "     $a = $a + ' TD{border-width: 0px;padding: 0px;border-style: solid;border-color: White;text-indent: 5px;background-color:White;white-space:nowrap}'\n",
+         "     $a = $a + '</style>'\n",
+         " }\n",
+         " $a = $a + '<table style='width: 100%'>'\n",
+         " $a = $a + ' <th style='border=2 ;border-top-color: lightgrey;text-align:left;background-color:$tableColor;font-size:small;color:White;margin-left:10px'>'+$org+'</th>'\n",
+         " $a = $a + '</table>' \n", 
+         " $a = $a + '<table>'\n",
+         " # $a = $a + ' <tr><td><img style='vertical-align: bottom;' src='+$RelativeImage+' width=50 height=35> </td>'\n",
+         " $a = $a + ' <td style='text-align:middle;font-size:small'> <h3>' + $theHeader + '</h3></td><td style='text-align:right'>' + $service + '</td></tr>'\n",
+         " $a = $a + '</table>'\n"]
+
+    },
+    {
+        "Line": "   $end = Get-Date\n"
+    },
+
+    {
+        "Line": "   $elapsedTime = $end - $start\n"
+    },
+    {
+        "Line": "   Write-Host 'Total Count: ' $totalCount\n"
+    },
+    {
+        "Line": "   Write-Host 'Elapsed Time: ' $elapsedTime\n"
+    },
+    {
+        "Line": "   $collectionTable\n"
+    },
+    { 
+        "Line": "   $thebody = $collectionTable | ConvertTo-HTML | Out-String\n"
+    },
+    {
+        "Line": "   #######################\n"
+    },
+    {
+        "Line": "   # // Send Email as HTML\n"
+    },
+    {
+        "Line": "   #######################\n"
+    },
+    {
+        "Line": "   If($email.Ispresent){\n"
+    },
+    {
+        "Line": "       send-mailmessage -to $To -from $From -subject $Subject -body $thebody -smtpServer smtp.va.gov -bodyAshtml\n"
+    },
+    {
+        "Line": "       write-host Email sent to $To\n"
+    },
+    {
+        "Line": "   }\n"
+    },
+    {
+        "Line": "}\n"
+    }
+]

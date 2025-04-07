@@ -1,0 +1,19 @@
+[
+    {
+        "Line": "BEGIN {\n"
+    },
+
+    {
+        "Line": "   $start = Get-Date\n"
+    },
+
+    {
+        "Line": "   $collectionTable=@()\n"
+    },
+    {
+        "Line": "   $totalCount = 0\n"
+    },
+    {
+        "Line": "}\n"
+    }
+]

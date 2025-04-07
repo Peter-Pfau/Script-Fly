@@ -1,0 +1,36 @@
+[
+    {
+        "Line": "########\n"
+    },
+    {
+        "Line": "# Footer\n"
+    },
+    {
+        "Line": "########\n"
+    },
+    {
+        "Line": "$end = Get-Date;$ts = New-TimeSpan $start $end\n"
+    },
+    {
+        "Line": "$thebody = $thebody + '<font size=2 color=lightgrey><br>'\n"
+    },
+    {
+        "Line": "$thebody = $thebody + 'Node: ' + $hostname\n"
+    },
+    {
+        "Line": "$thebody = $thebody + '| User: ' + $env:Username\n"
+    },
+    {
+        "Line": "$thebody = $thebody + '| RunTime:  '+ (get-date).ToString()\n"
+    },
+    {
+        "Line": "$thebody = $thebody + '| Duration: '+$ts.hours+':'+ $ts.Minutes+':'+$ts.Seconds \n"
+    },
+    {
+        "Line": "$thebody = $thebody + '| <a href=//'+$hostname + $WebScript.Split(':')[0] +'>' + $WebScript.Split(':')[1]  +'</a>'n"
+    },
+    {
+        "Line": "$thebody = $thebody + '</font><br><br>'\n"
+    } 
+    
+]

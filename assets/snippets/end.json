@@ -1,0 +1,49 @@
+[
+    {
+        "Line": "End {\n"
+    },
+
+    {
+        "Line": "   $end = Get-Date\n"
+    },
+
+    {
+        "Line": "   $elapsedTime = $end - $start\n"
+    },
+    {
+        "Line": "   Write-Host 'Total Count: ' $totalCount\n"
+    },
+    {
+        "Line": "   Write-Host 'Elapsed Time: ' $elapsedTime\n"
+    },
+    {
+        "Line": "   $collectionTable\n"
+    },
+    { 
+        "Line": "   $thebody = $collectionTable | ConvertTo-HTML | Out-String\n"
+    },
+    {
+        "Line": "   #######################\n"
+    },
+    {
+        "Line": "   # // Send Email as HTML\n"
+    },
+    {
+        "Line": "   #######################\n"
+    },
+    {
+        "Line": "   If($email.Ispresent){\n"
+    },
+    {
+        "Line": "       send-mailmessage -to $To -from $From -subject $Subject -body $thebody -smtpServer smtp.va.gov -bodyAshtml\n"
+    },
+    {
+        "Line": "       write-host Email sent to $To\n"
+    },
+    {
+        "Line": "   }\n"
+    },
+    {
+        "Line": "}\n"
+    }
+]

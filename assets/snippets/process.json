@@ -1,0 +1,26 @@
+[
+    {
+        "Line": "PROCESS {\n"
+    },
+    {
+        "Line": "   foreach($computerName in $computerNames){\n"
+    },
+    {
+        "Line": "       \n\tthescriptcontent?\n"
+    },
+    {
+        "Line": "       \n\tthescriptcollection?\n"
+    },
+    {
+        "Line": "       $result\n"
+    },
+    {
+        "Line": "       $totalCount++\n"
+    },
+    {
+        "Line": "   }\n"
+    },
+    {
+        "Line": "}\n"
+    }
+]

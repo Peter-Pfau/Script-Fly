@@ -1,0 +1,44 @@
+[
+{
+    "Line": "<#\n"
+},
+{
+    "Line": ".DESCRIPTION\n"
+},
+{
+    "Line": "   thedescription?\n"
+},
+{
+    "Line": ".EXAMPLE\n"
+},
+{
+    "Line": "   example1?\n"
+},
+{
+    "Line": ".EXAMPLE\n"
+},
+{
+    "Line": "   example2?\n"
+},
+{
+    "Line": ".EXAMPLE\n"
+},
+{
+    "Line": "   example3?\n"
+},
+{
+    "Line": ".LINK\n   https://github.ec.va.gov/pages/Peter-Pfau/DNS-View/Doc/\n"
+},
+{
+    "Line": ".NOTES\n"
+},
+{
+    "Line": "   Author: Peter Pfau - OIT IO SS Directory Services <VHAETMADTeam@va.gov>\n"
+},
+{
+    "Line": "   Date:   thedate? \n"
+},
+{
+    "Line": "#>\n"
+}
+]

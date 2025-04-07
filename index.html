@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- https://www.youtube.com/watch?v=GTSNkuKn5ls -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <!-- highlight.js Syntax Highlight -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark-reasonable.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/qtcreator-dark.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/docco.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/devibeans.css"> -->
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>Script Fast</title>
+</head>
+<body>
+    <div class="Container">
+   
+            <h2>Script Fast</h2>
+            <div class="content">
+                <div class="input-box">
+                    <label for="script-type">Script Type:</label>
+                    <select id="script-type">
+                        <!-- <option value="basic-blank"></option> -->
+                        <option value="computer">Computer</option>
+                        <option value="user">User</option>
+                        <option value="group">Group</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label for="script-function">Script Function:</label>
+                    <select id="script-function">
+
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label for="script-name">Script Name:</label>
+                    <input type="text" name="script-name" id="script-name" placeholder="Enter script Name">
+                </div>
+                <div class="input-box">
+                    <label for="script-description">Script Description:</label>
+                    <input type="text" name="script-description" id="script-description" placeholder="Enter script Description">
+                </div>
+                <div class="input-area">
+                    <label for="script-content">Script Content:</label>
+                    <textarea name="script-content" id="script-content" cols="70" rows="7" placeholder="Enter script content"></textarea>     
+                </div>
+                <div class="input-area">
+                    <label for="script-collection">Script Collection:</label>
+                    <textarea name="script-collection" id="script-collection" cols="70" rows="6" placeholder="Enter script collection"></textarea>     
+                </div>
+                <span class="Complexity-title">Complexity</span>
+                <span class="Complexity-category">
+                    <input type="radio" name="complexity" id="Basic" value="Basic" checked="checked">
+                    <label for="Basic">Basic</label>
+                    <input type="radio" name="complexity" id="Intermediate" value="Intermediate">  
+                    <label for="Intermediate">Intermediate</label>
+                    <input type="radio" name="complexity" id="Advanced" value="Advanced" onclick="getCommentBasedHelp()">
+                    <label for="Advanced">Advanced</label>
+                    <input type="radio" name="complexity" id="Multi-Threaded" value="Multi-Threaded" >
+                    <label for="Multi-Threaded">Multi-Threaded</label>
+                    
+                </span>
+            </div>
+            <div class="example" >
+                <p id="example1"></p>
+                <p id="example2"></p>
+                <p id="example3"></p>
+                <p id="attribute1"></p>
+            </div>
+<div>
+    <textarea name="script-content-commentBasedHelp" id="script-content-commentBasedHelp" cols="70" rows="5" style="display: none"></textarea> 
+    <textarea name="script-content-parameters" id="script-content-parameters" cols="70" rows="5" style="display: none"></textarea> 
+    <textarea name="script-content-begin" id="script-content-begin" cols="70" rows="5" style="display: none"></textarea> 
+    <textarea name="script-content-process" id="script-content-process" cols="70" rows="5" style="display: none"></textarea> 
+    <textarea name="script-content-end" id="script-content-end" cols="70" rows="5" style="display: none"></textarea> 
+    <textarea name="script-content-endAdvanced" id="script-content-endAdvanced" cols="70" rows="5" style="display: none"></textarea> 
+    <!-- Troubleshoot View textarea -->
+    <!-- <textarea name="script-content-endAdvanced" id="script-content-endAdvanced" cols="70" rows="5" ></textarea>  -->
+
+</div>
+            <div class="button-container">
+                <button onclick="submitScript()">Build Script</button>
+            </div>
+        
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn" hidden="True">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <span class="copy-button" onclick="copyText()">Copy</span>
+
+            <p id="Popupwindow">Some text in the Modal..</p>
+            </div>
+
+    </div>
+    <script src="Assets/script/Complexity.js"> </script>
+    <script src="Assets/script/script.js">    </script>
+    <script>
+        // Define an array of options for the select dropdown
+        var optionsComputer = [
+            { value: "Get-blank", text: "" },
+            { value: "ServiceStatus", text: "Service Status" },
+            { value: "OS", text: "Operating System" },
+            { value: "IP", text: "IP Address" },
+            { value: "DNSCache", text: "DNS Cache" },
+            { value: "HotFix", text: "HotFix" },
+            { value: "TimeZone", text: "Get-TimeZone" },
+            { value: "Memory", text: "Memory" },
+            { value: "Events_Logon", text: "Events_Logon" }
+        ];
+        var optionsUser = [
+            { value: "Get-blank", text: "" },
+            { value: "Properties", text: "Properties" },
+            { value: "Email", text: "Email" },
+            { value: "DirectReports", text: "DirectReports" },
+        ];
+        // Get the select element
+        var selectElementType = document.getElementById("script-type");
+        // alert(selectElementType.value);
+        var selectElementFunction = document.getElementById("script-function");
+         // alert(selectElementFunction.value);
+        // Loop through the options array and create option elements
+        if(selectElementType.value === "computer"){
+            for (var i = 0; i < optionsComputer.length; i++) {
+                var option = document.createElement("option");
+                option.value = optionsComputer[i].value;
+                option.text = optionsComputer[i].text;
+                selectElementFunction.appendChild(option);
+            }   
+        }else if(selectElementType.value === "user"){
+            for (var i = 0; i < optionsUser.length; i++) {
+                var option = document.createElement("option");
+                option.value = optionsUser[i].value;
+                option.text = optionsUser[i].text;
+                selectElementFunction.appendChild(option);
+            }
+        }
+
+    </script>
+    <script>
+        ////////////////////////////////////
+        // Submit the entries and
+        // Piece together the code fragments
+        ////////////////////////////////////
+        function submitScript() {
+            var scriptName = document.getElementById("script-name").value;
+            var scriptFunction = document.getElementById("script-function").value;
+            var scriptType = document.getElementById("script-type").value;
+            var scriptDescription = document.getElementById("script-description").value;
+            //
+            //**1 Get the textarea .value and replace \n with <br>
+            var scriptContent = document.getElementById("script-content").value; 
+            var scriptContent = scriptContent.replace(/\n/g, "<br>");    
+
+            var scriptCollection = document.getElementById("script-collection").value; 
+            // /g = .replaceAll  
+            // replace \n Text with <br> HTML
+            var scriptCollection = scriptCollection.replace(/\n/g, "<br>");     
+
+            var scriptComplexity = document.querySelector('input[name="complexity"]:checked').value;      
+            var scriptExample1 = document.getElementById("example1").innerHTML;
+            var scriptExample2 = document.getElementById("example2").innerHTML;
+            var scriptExample3 = document.getElementById("example3").innerHTML;
+            ////////////////
+            // Basic Script
+            ///////////////
+            if (scriptComplexity === "Basic") {
+                //**2 Build string variables with <br>
+                var Begin = "Begin {<br>$start = Get-Date<br>$collectionTable=@()<br>$totalCount = 0<br>}";
+                var Process = "Process {<br>" + scriptContent +"<br><br>$result<br><br>$totalCount++<br>$collectionTable += $result<br>}<br>";
+                var End = "End {<br>$end = Get-Date<br>$elapsedTime = $end - $start<br>Write-Host 'Total Count: ' $totalCount<br>Write-Host 'Elapsed Time: ' $elapsedTime<br>}";
+                //**3 Build output string with + and terminate with <br> 
+                output = "<pre><code><# <br>.Synopsis<br>    " + scriptDescription + "<br>.Description<br>    " + scriptDescription + 
+                "<br>.Example<br>    " + scriptExample1+ "<br>.Example<br>" + scriptExample2 + "<br>.Example<br>" + scriptExample3 +"<br>#>" +
+                "<br><br> param ( <br> [parameter(Mandatory=$false,ValueFromPipeline=$true)] <br> [string]$ComputerName = $env:COMPUTERNAME <br> ) <br> <br> " +
+                Begin + "<br> " + 
+                Process + "<br> " + 
+                End + "<br></code></pre>"
+                //**4 Replace <br> with \n
+                output = output.replace(/<br>/g, "\n");
+                
+            }else if (scriptComplexity === "Intermediate") {   
+                //**1 Get the textarea .value and replace \n with <br>
+                var commentBasedHelp = document.getElementById("script-content-commentBasedHelp").value;
+                var commentBasedHelp = commentBasedHelp.replace(/\n/g, "<br>");     
+                var parameters = document.getElementById("script-content-parameters").value;
+                var parameters = parameters.replace(/\n/g, "<br>");     
+                var begin = document.getElementById("script-content-begin").value;
+                var begin = begin.replace(/\n/g, "<br>");     
+                var process = document.getElementById("script-content-process").value;
+                var process = process.replace(/\n/g, "<br>");  
+                var end = document.getElementById("script-content-end").value;
+
+                // Add the <pre><code> tabs for the Modal
+                output = "<pre><code>" + commentBasedHelp + parameters + begin + process + end + "<br></code></pre>"
+                output = output.replace(/<br>/g, "\n");  
+                output = output.replace("example1?", scriptExample1);
+                output = output.replace("example2?", scriptExample2);
+                output = output.replace("example3?", scriptExample3);
+                output = output.replace("thedescription?", scriptDescription);
+                const date = new Date();
+                output = output.replace("thedate?", date);
+                output = output.replace("theheader?", scriptType + " " + scriptFunction);
+                output = output.replace("theservice?", scriptDescription);
+                output = output.replace("thesubject?", scriptFunction);
+                output = output.replace("thescriptcontent?", scriptContent);
+                // alert(scriptCollection);
+                scriptCollection = scriptCollection.replace(/<br>/g, "\n");
+                output = output.replace("thescriptcollection?", scriptCollection);
+                // alert(output);
+                output = output.replace("theorg?", "OIT IO SS Authentication Services");
+                output = output.replace("Get-xxxxx.ps1", scriptName);
+             
+            /////////////////////////
+            // Advanced Script
+            ////////////////////////
+            }else if (scriptComplexity === "Advanced") {
+                var commentBasedHelp = document.getElementById("script-content-commentBasedHelp").value;
+
+                var commentBasedHelp = commentBasedHelp.replace(/\n/g, "<br>");     
+                var parameters = document.getElementById("script-content-parameters").value;
+                var parameters = parameters.replace(/\n/g, "<br>");     
+                var begin = document.getElementById("script-content-begin").value;
+                var begin = begin.replace(/\n/g, "<br>");     
+                var process = document.getElementById("script-content-process").value;
+                var process = process.replace(/\n/g, "<br>");  
+                var end = document.getElementById("script-content-endAdvanced").value;
+                var end = end.replaceAll('<', "&lt");
+                var end = end.replaceAll('>', "&gt");
+
+
+                // Add the <pre><code> tabs for the Modal
+                output = "<pre><code>" + commentBasedHelp + parameters + begin + process + end +  "<br></code></pre>"
+                // output = "<pre><code>" +  end +  "<br></code></pre>"
+                output = output.replace(/<br>/g, "\n");  
+                output = output.replace("example1?", scriptExample1);
+                output = output.replace("example2?", scriptExample2);
+                output = output.replace("example3?", scriptExample3);
+                output = output.replace("thedescription?", scriptDescription);
+                const date = new Date();
+                output = output.replace("thedate?", date);
+                output = output.replace("theheader?", scriptType + " " + scriptFunction);
+                output = output.replace("theservice?", scriptDescription);
+                output = output.replace("thesubject?", scriptFunction);
+                scriptContent = scriptContent.replace(/<br>/g, "\n");
+                output = output.replace("thescriptcontent?", scriptContent);
+                // alert(scriptCollection);
+                scriptCollection = scriptCollection.replace(/<br>/g, "\n");
+                // alert(scriptCollection);
+                output = output.replace("thescriptcollection?", scriptCollection);
+                output = output.replace("theorg?", "OIT IO SS Authentication Services");
+                output = output.replace("Get-xxxxx.ps1", scriptName);
+                // Need top fix the style tag
+                // The <pre> and <code> tags do not understand the <style> tag as a string. Not sure how to escape this so <code> tag in dialog displays as a string ?????
+                // Got it ASCII Table Replacements < > / "  are &lt; &gt; and &amp;
+                output = output.replace(/<style>/g, "&lt;style&gt;");
+                output = output.replaceAll('</style>', "&lt/style&gt;");
+                //<span> fix ASCII
+                output = output.replace(/<span>&#/g, "&lt;span&gt;&amp;&num;");
+                output = output.replaceAll('</span>', "&lt/span&gt;");
+                
+
+
+
+                //
+                //alert(output)
+
+            /////////////////////////
+            // Multi-Threaded Script
+            ////////////////////////
+            }else if (scriptComplexity === "Multi-Threaded") {
+                var theAttribute = document.getElementById("attribute1").innerHTML
+                var theScriptBlock = scriptContent.replace(/<br>/g, "\n");
+                // var theScriptBlock = scriptContent;
+                var theparam = "param ( <br> [parameter(Mandatory=$false,ValueFromPipeline=$true)] <br> [string[]]$ComputerNames,<br>[string]$DomainName='',<br>[string]$inputFile='' <br> )"
+                var theFunction = "<br>$getInfo = {<br>  param(<br>  [string]$ComputerName <br> ) <br> function CheckSystem ($ComputerName){<br>" +
+                    "$compObj = Invoke-command -computerName $computerName -ScriptBlock {"+ theScriptBlock+"}<br>" +
+                    "$objComputer  = New-Object psobject -Property @{Name = $computerName;"+theAttribute+" = $compObj."+theAttribute+"}<br>" +
+                    "Return $objComputer<br>" +
+                    "}<br>" +
+                    "CheckSystem $ComputerName<br>" +
+                    "}<br><br>" 
+                var startJob = "foreach ($computerName in $computerNames) {<br>" +
+                    "start-job -name $computerName -ScriptBlock $getInfo -argumentlist $computerName <br>" +
+                    "}<br><br>" 
+                var theWhile = "<br> $runningcount = (get-job | where state -eq running).count <br>"+
+                    "while ($runningcount -gt 0) {<br>" +
+                    "start-sleep -seconds 5<br>" +
+                    "$runningcount = (get-job | where state -eq running).count<br>" +
+                    "}<br><br>"
+                var theOutPut = "# Output"+
+                "<br>write-host 'Total Count: ' $Cnt"+
+                "<br>$end = Get-Date<br>"+
+                "<br>$elapsedTime = $end - $start<br>"+
+                "Write-Host 'Total Count: ' $totalCount"+
+                "Write-Host 'Elapsed Time: ' $elapsedTime"+
+                "<br>$endResult = get-job | Receive-Job -Force -Wait "+
+                "<br>$endResult | ogv"+
+                "<br>get-job | remove-job -Force"
+
+                output = "<pre><code><# <br>.Synopsis<br>" + scriptDescription + "<br>.Description<br>    " + scriptDescription + 
+                "<br>.Example<br> " + scriptExample1+ "<br>.Example<br>" + scriptExample2 + "<br>.Example<br>" + scriptExample3 + "<br>#><br>" +
+                theparam + theFunction + "<br> $start = Get-Date <br>" +
+                "if($DomainName -ne ''){$computerNames = (Get-ADDomainController -filter * -Server $DomainName).Hostname}<br>"+
+                "if($inputFile -ne ''){$computerNames = gc $inputFile}<br>"+
+                startJob + theWhile + theOutPut + "</code></pre>"
+
+                output = output.replace(/<br>/g, "\n");
+
+            }    
+            document.getElementById("Popupwindow").innerHTML = output
+            modal.style.display = "block";
+            modal.style.fontSize = "1.25em";
+
+            hljs.initHighlightingOnLoad(); 
+            // class=language-powershell
+            // { language: 'powershell' }
+        } 
+        
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // // Get the <span> element that closes the modal
+        // var copybtn = document.getElementsByClassName("copy-button");
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+        modal.style.display = "block";
+        output.innerHTML = ""
+        }
+
+        // // Alert the user that the text has been copied
+        // copybtn.onclick = function() {
+        //     copybtn.innerHTML = "Copied!";
+        // }
+
+        // setTimeout(function(){
+        //     document.getElementByclass(copy-button).innerText = "Copy";
+        // }, 2000);
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        output.innerHTML = ""
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                output.innerHTML = ""
+            }
+        }
+        var scriptTypeElementType = document.getElementById("script-type");
+        scriptTypeElementType.onchange = function() {
+            // alert("Selection changed");
+            // alert(scriptTypeElement.value);
+            document.getElementById("script-function").innerHTML = "";
+            document.getElementById("script-content").value = "";
+            document.getElementById("script-description").value = "";
+            var scriptType = document.getElementById("script-type").value;
+            if (scriptType === "computer") {
+                document.getElementById("script-name").value = "Get-Computer.ps1";
+            }else if (scriptType === "user") {
+                document.getElementById("script-name").value = "Get-User.ps1";
+            }else if (scriptType === "group") {
+                document.getElementById("script-name").value = "Get-Group.ps1";
+            }
+                    // Define an array of options for the select dropdown
+        var optionsComputer = [
+            { value: "Get-blank", text: "" },
+            { value: "ServiceStatus", text: "Service Status" },
+            { value: "OS", text: "Operating System" },
+            { value: "IP", text: "IP Address" },
+            { value: "DNSCache", text: "DNS Cache" },
+            { value: "HotFix", text: "HotFix" },
+            { value: "TimeZone", text: "Get-TimeZone" },
+            { value: "Memory", text: "Memory" },
+            { value: "Events_Logon", text: "Events_Logon" }
+        ];
+        var optionsUser = [
+            { value: "Get-blank", text: "" },
+            { value: "Properties", text: "Properties" },
+            { value: "Email", text: "Email" },
+            { value: "DirectReports", text: "DirectReports" },
+        ];
+        // Get the select element
+        var selectElementType = document.getElementById("script-type");
+        // alert(selectElementType.value);
+        var selectElementFunction = document.getElementById("script-function");
+        // alert(selectElementFunction.value);
+        // Loop through the options array and create option elements
+        selectElementFunction.innerHTML = ""; // Remove existing options
+        if(selectElementType.value === "computer"){
+            for (var i = 0; i < optionsComputer.length; i++) {
+                var option = document.createElement("option");
+                option.value = optionsComputer[i].value;
+                option.text = optionsComputer[i].text;
+                selectElementFunction.appendChild(option);
+            }   
+        }else if(selectElementType.value === "user"){
+            for (var i = 0; i < optionsUser.length; i++) {
+                var option = document.createElement("option");
+                option.value = optionsUser[i].value;
+                option.text = optionsUser[i].text;
+                selectElementFunction.appendChild(option);
+            }
+        }
+        }
+        var scriptFunctionElement = document.getElementById("script-function");
+        scriptFunctionElement.onchange = function() {
+            // alert("Selection changed");
+            // alert(scriptTypeElement.value);
+            var scriptFunction = document.getElementById("script-function").value;
+            if (scriptFunction === "ServiceStatus") {
+                document.getElementById("script-content").value = "$result = Invoke-command -computerName $computerName -ScriptBlock {Get-Service 'DNS' | Sort-Object status}"
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tName = $result\n \t}\n \t$collectionTable += $objComputer\n"
+                
+                //document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{ComputerName = $computerName;Name = $result.Name;Status = $result.Status;}\n;$collectionTable += $objComputer\n"
+                // "$result = Invoke-command -computerName $computerName -ScriptBlock {Get-Service}"+
+                // "\n#$result = Invoke-command -computerName $computerName -ScriptBlock {Get-Service 'DNS' | Sort-Object status}"+
+                // "\n#$result = Invoke-command -computerName $computerName -ScriptBlock {Get-Service -DisplayName 'DNS' | Stop-Service}"+
+                // "\n#$result = Invoke-command -computerName $computerName -ScriptBlock {start-service -name 'DNS'}";
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+                document.getElementById("attribute1").innerHTML = "Status";
+
+            }else if (scriptFunction === "OS") {
+                // document.getElementById("script-content").value = "Get-ComputerInfo -Property OsVersion";
+                document.getElementById("script-content").value = "$result = Invoke-command -computerName $computerName -ScriptBlock {Get-ComputerInfo -Property OsVersion}";
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tOsVersion = $result.OsVersion\n \t}\n \t$collectionTable += $objComputer\n"
+                //document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{ComputerName = $computerName;OsVersion = $result.OsVersion}\n;$collectionTable += $objComputer\n"
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+                document.getElementById("attribute1").innerHTML = "OsVersion";
+
+            }else if (scriptFunction === "IP") {
+                document.getElementById("script-content").value = "$result = (Resolve-DnsName -Name $ComputerName).IPAddress";
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tIP_Address = $result\n \t}\n \t$collectionTable += $objComputer\n"
+                //document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{ComputerName = $computerName;IP_Address = $result}\n;$collectionTable += $objComputer\n"
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+                document.getElementById("attribute1").innerHTML = "OsVersion";
+
+            }else if (scriptFunction === "DNSCache") {
+                document.getElementById("script-content").value ="$result = Invoke-command -computerName $computerName -ScriptBlock {Get-DnsServerCache}";
+                //document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{ComputerName = $computerName;DNS_Server_Cache = $result}\n;$collectionTable += $objComputer\n"
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tDNS_Server_Cache = $result\n \t}\n \t$collectionTable += $objComputer\n"
+                
+                // "$result = Invoke-command -computerName $computerName -ScriptBlock {Clear-DnsServerCache -Force}" +
+                // "\n#$result = Invoke-command -computerName $computerName -ScriptBlock {Show-DnsServerCache}" +
+                // "\n#$result = Invoke-command -computerName $computerName -ScriptBlock {Clear-DnsServerCache -Force}";
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+
+
+            }else if (scriptFunction === "HotFix") {
+                document.getElementById("script-content").value = "$result = Invoke-command -computerName $computerName -ScriptBlock {Get-HotFix}";
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tHotFix = $result\n \t}\n \t$collectionTable += $objComputer\n"
+                //document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{ComputerName = $computerName;HotFix = $result}\n;$collectionTable += $objComputer\n"
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+
+            }else if (scriptFunction === "TimeZone") {
+                document.getElementById("script-content").value = "$result = Invoke-command -computerName $computerName -ScriptBlock {Get-TimeZone}" ;
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tTimeZone = $result\n \t}\n \t$collectionTable += $objComputer\n"
+                //document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{ComputerName = $computerName;TimeZone = $result}\n;$collectionTable += $objComputer\n"
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+                document.getElementById("attribute1").innerHTML = "DisplayName";
+
+
+            }else if (scriptFunction === "Memory") {
+                document.getElementById("script-content").value = "$result = Invoke-command -computerName $computerName -ScriptBlock {Get-ComputerInfo -Property *memory}"  
+                document.getElementById("script-collection").value = "$objComputer  = New-Object psobject -Property @{\n\t\tComputerName = $computerName\n\t\tTotalPhysicalMemory = $result.CsTotalPhysicalMemory\n\t\tFreePhysicalMemory = $result.OsFreePhysicalMemory  \n \t}\n \t$collectionTable += $objComputer\n"
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+                document.getElementById("attribute1").innerHTML = "CsTotalPhysicalMemory"
+            
+            }else if (scriptFunction === "Events_Logon") {
+                document.getElementById("script-content").value = "## Authentications in 1 Second\n"+
+                "\n $theEnd = (Get-Date).ToString('MM/dd/yyyy hh:mm:ss tt')"+
+                "\n $theStart = ([datetime]$theEnd).AddSeconds(-1).ToString('MM/dd/yyyy hh:mm:ss tt')"+
+                "\n $result = Invoke-command -computerName $computerName -ScriptBlock {(Get-WinEvent -FilterHashtable @{logname='Security';id=4624;StartTime=$theStart;EndTime=$theEnd}).count}"  
+                document.getElementById("script-collection").value = "";
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-Computer"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafar3dc1.v23.med.va.gov' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: (Get-ADDomainController -filter * -Server v23.med.va.gov).Hostname | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3: (Get-ADForest).Domains | %{ Get-ADDomainController -Filter * -Server $_ } | .\\"+scriptName;
+
+
+            }else if (scriptFunction === "Properties") {
+                document.getElementById("script-content").value = "\n" + 
+                "$result = Get-ADUser -Identity $env:USERNAME -Properties *";
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-User"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-User"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafarpfaup' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: 'vhafarpfaup','vhaisastuars' | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3:  .\\"+scriptName + ' -infile FileName.txt';
+
+            }else if (scriptFunction === "Email") {
+                document.getElementById("script-content").value = "\n" + 
+                "$result = Get-ADUser -Identity $env:USERNAME -Properties * | Select-Object -ExpandProperty EmailAddress";
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-User"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-User"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafarpfaup' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: 'vhafarpfaup','vhaisastuars' | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3:  .\\"+scriptName + ' -infile FileName.txt';
+
+            }else if (scriptFunction === "DirectReports") {
+                document.getElementById("script-content").value = "\n" + 
+                "$result = Get-ADUser -Identity $env:USERNAME -Properties * | Select-Object -ExpandProperty DirectReports";
+                document.getElementById("script-description").value = scriptFunction;
+                scriptName = "Get-User"+scriptFunction+".ps1";
+                document.getElementById("script-name").value = "Get-User"+scriptFunction+".ps1";
+                document.getElementById("example1").innerHTML = "Example 1: 'vhafarpfaup' | .\\"+scriptName;
+                document.getElementById("example2").innerHTML = "Example 2: 'vhafarpfaup','vhaisastuars' | .\\"+scriptName;
+                document.getElementById("example3").innerHTML = "Example 3:  .\\"+scriptName + ' -infile FileName.txt';
+
+            }   
+            
+
+        }
+
+
+   </script>
+    
+<script>
+    function copyText() {
+
+        /* Copy text into clipboard */
+        // var thetext = document.getElementById("script-content").value
+        var thetext = document.getElementById("Popupwindow").innerText
+        // alert(thetext)
+        navigator.clipboard.writeText(thetext)
+
+        // var cpbtn = document.getElementByclass("copy-button")
+        // // Alert the user that the text has been copied
+        // document.getElementByclass("copy-button").innerHTML = "Copied!";
+        // cpbtn.innerText = "Copied!";
+        // cpbtn.value = "copied!";
+
+    }
+</script>
+<script>
+    async function getCommentBasedHelp() {
+        const response = await fetch('./assets/snippets/commentBasedHelp.json',{                     
+        method: 'GET',
+        headers: {
+                'Content-Type': "application/json; charset=UTF-8",
+                "Access-Control-Allow-Headers":"*",
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Request-Headers":"authorization"
+            }
+        //mode: "no-cors",  //cross origin resource sharing 
+        });
+        const json = await response.json();
+        console.log(json); 
+        var Array = json;
+        let length =  Array.length;
+        // alert(length);
+        // var commentBasedHelp  = "<br>";
+        var commentBasedHelp  = "\n";
+        // Loop through the options array and build scripttions
+        for (var i = 0; i < Array.length; i++) {
+            var commentBasedHelp  = commentBasedHelp  + Array[i].Line;
+        }
+        // var commentBasedHelp  = commentBasedHelp.replace(/<br>/g, "\n");
+        // alert(commentBasedHelp);
+        document.getElementById("script-content-commentBasedHelp").value = commentBasedHelp;  
+        getParameters();
+    }
+
+    async function getParameters() {
+        const response = await fetch('./assets/snippets/parameters.json',{                     
+        method: 'GET',
+        headers: {
+                'Content-Type': "application/json; charset=UTF-8",
+                "Access-Control-Allow-Headers":"*",
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Request-Headers":"authorization"
+            }
+        //mode: "no-cors",  //cross origin resource sharing 
+        });
+        const json = await response.json();
+        console.log(json); 
+        var Array = json;
+        let length =  Array.length;
+        // alert(length);
+        var parameters  = "\n";
+        // Loop through the options array and build scripttions
+        for (var i = 0; i < Array.length; i++) {
+            var parameters  = parameters  + Array[i].Line;
+        }
+        // var parameters  = parameters.replace(/<br>/g, "\n");
+        // alert(parameters);
+        document.getElementById("script-content-parameters").value = parameters;  
+        getBegin();
+    }
+
+    async function getBegin() {
+        const response = await fetch('./assets/snippets/begin.json',{                     
+        method: 'GET',
+        headers: {
+                'Content-Type': "application/json; charset=UTF-8",
+                "Access-Control-Allow-Headers":"*",
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Request-Headers":"authorization"
+            }
+        //mode: "no-cors",  //cross origin resource sharing 
+        });
+        const json = await response.json();
+        console.log(json); 
+        var Array = json;
+        let length =  Array.length;
+        // alert(length);
+        var begin  = "\n";
+        // Loop through the options array and build scripttions
+        for (var i = 0; i < Array.length; i++) {
+            var begin  = begin  + Array[i].Line;
+        }
+        // var begin  = begin.replace(/<br>/g, "\n");
+        // alert(begin);
+        document.getElementById("script-content-begin").value = begin;  
+        getProcess();
+    }
+
+    async function getProcess() {
+        const response = await fetch('./assets/snippets/process.json',{                     
+        method: 'GET',
+        headers: {
+                'Content-Type': "application/json; charset=UTF-8",
+                "Access-Control-Allow-Headers":"*",
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Request-Headers":"authorization"
+            }
+        //mode: "no-cors",  //cross origin resource sharing 
+        });
+        const json = await response.json();
+        console.log(json); 
+        var Array = json;
+        let length =  Array.length;
+        // alert(length);
+        var process  = "\n";
+        // Loop through the options array and build scripttions
+        for (var i = 0; i < Array.length; i++) {
+            var process  = process  + Array[i].Line;
+        }
+        // var process  = process.replace(/<br>/g, "\n");
+        // alert(process);
+        document.getElementById("script-content-process").value = process;  
+        getEnd();
+    }
+
+    async function getEnd() {
+        const response = await fetch('./assets/snippets/end.json',{                     
+        method: 'GET',
+        headers: {
+                'Content-Type': "application/json; charset=UTF-8",
+                "Access-Control-Allow-Headers":"*",
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Request-Headers":"authorization"
+            }
+        //mode: "no-cors",  //cross origin resource sharing 
+        });
+        const json = await response.json();
+        console.log(json); 
+        var Array = json;
+        let length =  Array.length;
+        // alert(length);
+        var endCode = "\n";
+        // Loop through the options array and build script
+        for (var i = 0; i < Array.length; i++) {
+            // alert(Array[i].Line)
+            var endCode = endCode + Array[i].Line;
+        }
+        // var endCode = endCode.replace(/<br>/g, "\n");
+        // alert(endCode)
+        // var endCode = endCode.replace("<br>", "\n");
+        document.getElementById("script-content-end").innerHTML = endCode;  
+        getEndAdvanced();   
+    }
+
+    async function getEndAdvanced() {
+        const response = await fetch('./assets/snippets/endAdvanced.json',{                     
+        method: 'GET',
+        headers: {
+                'Content-Type': "application/json; charset=UTF-8",
+                "Access-Control-Allow-Headers":"*",
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Request-Headers":"authorization"
+            }
+        //mode: "no-cors",  //cross origin resource sharing 
+        });
+        const json = await response.json();
+        console.log(json); 
+        var Array = json;
+        let length =  Array.length;
+        // alert(length);
+        var endCode = "\n";
+        // Loop through the options array and build script
+        for (var i = 0; i < Array.length; i++) {
+            //alert(Array[i].Line)
+            var endCode = endCode + Array[i].Line;
+        }
+        // var endCode = endCode.replace("<style>", "<style>");
+        // var endCode = endCode.replace("</style>", "</style>");
+        // var endCode = endCode.replace(/<br>/g, "\n");
+        // alert(endCode)
+        // var endCode = endCode.replace("<br>", "\n");
+        document.getElementById("script-content-endAdvanced").innerHTML = endCode;     
+    }
+
+</script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+         hljs.initHighlightingOnLoad();     
+    </script>
+</body>
+
+</html>
