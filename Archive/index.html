@@ -176,11 +176,10 @@
     async function callParametersRoute() {
         try {
             const response = await fetch('/parameters', {
-                method: 'POST',
+                method: 'GET', // or 'POST', depending on your API
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ emojiHTML })
+                }
             });
 
             if (!response.ok) {
@@ -188,10 +187,10 @@
             }
 
             const data = await response.json();
-            console.log('Server response:', data);
-            alert('Emoji HTML: ' + data.emojiHTML);
+            console.log('Response from /test:', data);
+            alert('Response received: ' + JSON.stringify(data));
         } catch (error) {
-            console.error('Error sending emoji HTML:', error);
+            console.error('Error calling /test route:', error);
             alert('Error: ' + error.message);
         }
     }
@@ -321,15 +320,11 @@
                 //<span> fix ASCII
                 output = output.replace(/<span>&#/g, "&lt;span&gt;&amp;&num;");
                 output = output.replaceAll('</span>', "&lt/span&gt;");
-
-                // Replace emoji HTML placeholder with escaped HTML code
-                const emojiSelector = document.getElementById('emoji-selector');
-                const selectedEmoji = emojiSelector.value;
-                const emojiHTML = `&#${selectedEmoji.codePointAt(0)};`;
-                const escapedEmojiHTML = `&amp;#${selectedEmoji.codePointAt(0)};`;
-                output = output.replace(/%Emoji_HTML%/g, escapedEmojiHTML);
+                
 
 
+
+                //
                 //alert(output)
 
             /////////////////////////

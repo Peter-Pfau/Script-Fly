@@ -37,11 +37,10 @@ app.get('/', (req, res) => {
 });
 
 
-// Route to handle emoji HTML updates
-app.post('/parameters', (req, res) => {
-  const { emojiHTML } = req.body;
-  console.log('Received emoji HTML:', emojiHTML);
-  res.json({ emojiHTML });
+// Test endpoint to verify server is working
+app.get('/parameters', (req, res) => {
+  console.log('Test endpoint called');
+  res.json('Server is working!');
 });
 
 
